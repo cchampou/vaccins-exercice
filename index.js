@@ -8,12 +8,24 @@ fetch(url)
     const shiftedLines = lines.slice(1);
     const splittedLines = shiftedLines.map(str => {
       return str.split(',');
-    })
-    console.log(splittedLines[0][0])
+    });
     const result = splittedLines.reduce((acc, entry) => {
-      const exists = acc.find(line => line[0] === entry[0]);
-      // if (exists >= 0 && ) {
-      //    TODO: Finish this reduce ! \o/
-      // }
+      const exists = acc.findIndex(line => line[0] === entry[0]);
+      if(entry[0] == '')
+      return acc;
+      if (exists == -1)
+        acc.push(entry);
+      if ( exists > -1 && acc[exists][2] < entry[2]){
+        acc[exists] = entry;
+      }
+      return acc;
     }, [])
+    .reduce((current, entry)=>{
+        current.push({
+          country : entry[0],
+          date : entry[2],
+          people_fully_vaccinated_per_hundred : entry[3]
+        });
+      return current;
+    },[])
   });
