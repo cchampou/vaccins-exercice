@@ -24,7 +24,7 @@ fetch(url)
         current.push({
           country : entry[0],
           date : entry[2],
-          people_fully_vaccinated_per_hundred : entry[3]
+          total_vaccinations : entry[3]
         });
       return current;
     },[])
